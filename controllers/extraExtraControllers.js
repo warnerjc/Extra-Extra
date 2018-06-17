@@ -6,10 +6,16 @@ const router = express.Router();
 const Article = require('../models/Article.js');
 const Note = require('../models/Note.js');
 
-router.get("/", function(req, res) {
+router.get('/', function(req, res) {
     
     res.render('index');
   
 });
+
+router.get('/saved', function(req, res) {
+
+    res.render('saved');
+
+})
 
 module.exports = router;  
