@@ -20,14 +20,21 @@ router.get('/', function(req, res) {
         // For each element with a 'title' class
         $('.title').each( function(i, element) {
             // Save the text and href of each link enclosed in the current element
-            const title = $(element).children('a').text();
-            const link = $(element).children('a').attr('href');
+            let title = $(element).children('a').text();
+            let link = $(element).children('a').attr('href');
+
+            console.log(link);
+
+            let article = {
+                title: title,
+                link: link
+            };
 
             // If this found element had both a title and a link
             if (title && link) {
-                // Inster the data in the Articles db
-                db.Article.create( {title, link})
-                .then( dbArticle => console.log(dbArticle) )
+                // Insert the data in the Articles db
+                db.Article.create( article )
+                .then( dbArticle => console.log('Successful') )
                 .catch( err => res.json(err));
             }
         });       
@@ -36,7 +43,8 @@ router.get('/', function(req, res) {
 
     db.Article.find( {} )
     .then( function(dbArticles) {
-        res.render('index', dbArticles);
+        // console.log(dbArticles);
+        res.render('index', { dbArticles } );
     })
     .catch( function(err) {
         res.json(err);
