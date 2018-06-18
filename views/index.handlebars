@@ -8,7 +8,7 @@
     <div class='collapse navbar-collapse' id='navbarNavAltMarkup'>
         <div class='navbar-nav'>
             <a class='nav-item nav-link' href='/saved'>Saved Articles</a>
-            <a class='nav-item nav-link' href='#'>Scrape New Articles</a>
+            <a class='nav-item nav-link scrape' href='/scrape'>Scrape New Articles</a>
         </div>
     </div>
 </nav>
@@ -26,12 +26,26 @@
 <main>
     <div class='container'>
         {{#each dbArticles}}
-            <p>
-                <li>{{this.title}}</li>
-                <li>{{this.link}}</li>
-            </p>
+            <div class='row mb-3 article'>
+                <div class='card w-100'>
+                    <div class='card-body'>
+                        <h5 class='card-title'>{{this.title}}</h5>
+                        <p class='card-text'>{{this.body}}</p>
+                        <p class='card-text'>Date: {{this.articleDate}}</p>
+                        <a href={{this.link}} class='btn btn-primary'>Visit Source</a>
+                    </div>
+                </div>
+            </div>
         {{else}}
-            <p class='empty'>No content</p>
+            <div class='row'>
+                <div class='card w-100'>
+                    <div class='card-body'>
+                        <h5 class='card-title'>We couldn't find any Articles in the DB.</h5>
+                        <p class='card-text'>Scrape for new Articles.</p>
+                        <a href='/scrape' class='btn btn-primary scrape'>Scrape</a>
+                    </div>
+                </div>
+            </div>
         {{/each}}
     </div>
 
