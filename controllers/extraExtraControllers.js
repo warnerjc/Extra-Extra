@@ -28,7 +28,7 @@ router.get('/scrape', function (req, res) {
 
         // Load the html body from request into cheerio
         const $ = cheerio.load(body);
-
+    
         // For each element with a 'title' class
         $('.u-borderBox').each(function (i, element) {
             // Save the text and href of each link enclosed in the current element
@@ -87,10 +87,9 @@ router.get('/scrape', function (req, res) {
             }
         });
 
-        res.send('Articles successfully scraped.');
-
-    });   
-
+        res.redirect('/');
+        
+    });
 });
 
 router.get('/saved', function (req, res) {
